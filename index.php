@@ -18,6 +18,12 @@ if(Req::NewLakeSub())
 	
 View::ShowLakelist();
 View::Createleak();
+$details = Req::LakeDetailsRequest();
+if($details)
+{
+	$details = Model::getLakeByIdString($details);
+	View::LakeDetails($details);
+}
 
 $myproject = Model::SelectLakes();
 View::ShowLakes($myproject);

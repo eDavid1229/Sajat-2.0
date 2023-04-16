@@ -79,5 +79,39 @@ class View
 		
 		return $html;
 	}
+	public static function LakeDetails($contact)
+	{
+		echo '<section class="p-4 bg-white shadow mb-4>';
+		echo '<h3 class="mb-3">A tó részletes adata<h3>';
+		echo '<table class="table"><tbody>';
+		
+		echo self::LakesItem("Tó neve", $contact, "lakename");
+		echo self::LakesItem("Tó elhelyezkedése", $contact, "lakelocation");
+		echo self::LakesItem("Tó típusa", $contact, "laketype");
+		
+		echo '</tbody></table>';
+		echo '</section>';
+	}
+	
+	private static function LakesItem($title,$contact, $key)
+	{
+		$html = '';
+		
+		if(isset($contact[$key]))
+		{
+			$value = $contact[$key];
+			
+				if(is_object($value))
+				{
+					$value = $value->getArrayCopy();
+					$value = '<ul><li>'. implode('</li><li>', $value) .'</li></ul>';
+				}
+		
+			$html .= ('<tr><td><strong>'. $title .'</strong></td>');
+			$html .= ('<td class="display-6">'. $value .'</td></tr>');
+		}
+		
+		return $html;
+	}
 	
 }

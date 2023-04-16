@@ -20,4 +20,12 @@ class Req
 			
 			return $data;
 	}
+	public static function LakeDetailsRequest()
+	{
+		if(isset($_GET["details"]))
+		{
+			return $_GET["details"];
+		}
+		return null;
+	}
 }

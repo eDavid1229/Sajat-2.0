@@ -23,6 +23,22 @@ class Model
 		
 		return $list->toArray();
 	}
+	public static function getLakeByIdString($idString)
+	{
+		$collection = self::$db->myproject;
+		
+		$filter = self::CreateFilterByIdString($idString);
+		$item = $collection->findOne($filter);
+		return $item;
+	}
+	private static function CreateFilterByIdString($idString)
+	{
+		$objectId = new MongoDB\BSON\ObjectId();
+		$objectId->unserialize($idString);
+		
+		$filter = ['_id' => $objectId];
+		return $filter;
+	}
 	
 	private static $db;
 }
